@@ -1,14 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Button, TextField } from "@material-ui/core";
 
 class SearchBar extends Component {
     constructor(props) {
+        super(props);
         this.state = {
             isHidden: false,
-            this.text
-        }
+            query: this.props.query
+        };
     }
+
+    _handleQueryUpdate = event => {
+        this.setState({
+            query: event.target.value
+        });
+        this.props.queryChange(event.target.value);
+    };
+
     render() {
-        return <div>{this.props.text}</div>
+        return (
+            <div>
+                <TextField
+                    color="primary"
+                    autoFocus={true}
+                    fullWidth={true}
+                    value={this.state.query}
+                    onChange={this._handleQueryUpdate}
+                    inputProps={{
+                        style: { textAlign: "center" }
+                    }}
+                    placeholder="Search for buildings, i.e. William James"
+                />
+                <Button variant="contained" color="primary">
+                    Search
+                </Button>
+            </div>
+        );
     }
 }
 
