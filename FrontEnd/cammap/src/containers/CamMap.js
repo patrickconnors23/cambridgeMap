@@ -1,19 +1,22 @@
 import React, {Component} from 'react'
 import GMap from '../components/GMap'
-// const config = require("../config.json");
 import config from '../config.json'
 
 class CambridgeMap extends Component {
     constructor(props) {
         super(props);
+        var q;
+        if (this.props.location.state) {
+          q = this.props.location.state.query;
+        } else {q = "";}
         this.state = {
             isLoaded: false,
             error: null,
             BUILDING_API: config.Backend.URL,
+            query: q,
             buildings: [],
             selectedBuildings: []
         };
-
     }
 
     componentDidMount() {
@@ -45,7 +48,9 @@ class CambridgeMap extends Component {
             return <div>Loading...</div>; 
         } else {
             return (
-              <GMap buildings={selectedBuildings}></GMap>
+              <div>
+                  <GMap buildings={selectedBuildings}></GMap>
+              </div>
             );
         }
     }

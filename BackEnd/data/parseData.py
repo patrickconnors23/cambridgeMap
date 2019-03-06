@@ -1,5 +1,4 @@
 import json
-import pandas as pd
 
 with open("buildings.json") as JSON:
     data = json.load(JSON)

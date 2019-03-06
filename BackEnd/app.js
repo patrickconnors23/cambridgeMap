@@ -1,5 +1,6 @@
 'use strict';
 const express = require('express');
+const cors = require('cors');
 const buildingData = require('./lib/build.js');
 const buildingDataWrapper = new buildingData();
 
@@ -9,16 +10,21 @@ const HOST = '0.0.0.0';
 
 // App
 const app = express();
+app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send("Welcome to the node.js api\n");
+  res.send({
+    "api":"Cambridge Map",
+    "version": "1.0.0",
+    "endpoints": ["/buildingTypes", "/buildings"]
+  })
 });
 
-app.get('/getBuildingTypes', (req, res) => {
+app.get('/buildingTypes', (req, res) => {
   res.send(buildingDataWrapper.getBuildingTypesResource());
 });
 
-app.get('/getBuildingData', (req, res) => {
+app.get('/buildings', (req, res) => {
   res.send(buildingDataWrapper.getDataResource());
 });
 

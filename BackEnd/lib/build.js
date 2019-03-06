@@ -29,8 +29,6 @@ class BuildingData {
             "data": this.buildingTypes
         }
     }
-
-
 }
 
 module.exports = BuildingData;
