@@ -19,7 +19,12 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <div>
+            <div
+                className="SearchBar"
+                style={{
+                    width: "50%"
+                }}
+            >
                 <TextField
                     color="primary"
                     autoFocus={true}
@@ -29,11 +34,11 @@ class SearchBar extends Component {
                     inputProps={{
                         style: { textAlign: "center" }
                     }}
-                    placeholder="Search for buildings, i.e. William James"
+                    placeholder="Search for buildings, i.e. William James Hall"
                 />
-                <Button variant="contained" color="primary">
+                {/* <Button variant="contained" color="primary">
                     Search
-                </Button>
+                </Button> */}
             </div>
         );
     }

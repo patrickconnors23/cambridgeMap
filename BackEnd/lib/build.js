@@ -1,33 +1,35 @@
 const data = require("../data/buildingsParsed.json");
 
 class BuildingData {
-    constructor () {
+    constructor() {
         this.data = data;
-        this.buildingTypes = ['Harvard Places', 
-            'Harvard Libraries', 
-            'Harvard Housing', 
-            'Harvard Buildings', 
-            'MBTA Stations', 
-            'Harvard Schools', 
-            'Harvard Museums and Galleries', 
-            'Harvard Rooms and Auditoriums', 
-            'Streets', 
-            'Harvard Dining', 
-            'Other Places', 
-            'Athletics Facilities', 
-            'Harvard Residential Houses', 
-            'Departments, Centers,', 
-            'Departments, Centers, Institutes']
+        this.buildingTypes = [
+            "Harvard Places",
+            "Harvard Libraries",
+            "Harvard Housing",
+            "Harvard Buildings",
+            "MBTA Stations",
+            "Harvard Schools",
+            "Harvard Museums and Galleries",
+            "Harvard Rooms and Auditoriums",
+            "Streets",
+            "Harvard Dining",
+            "Other Places",
+            "Athletics Facilities",
+            "Harvard Residential Houses",
+            "Departments, Centers,",
+            "Departments, Centers, Institutes"
+        ];
     }
-    getDataResource () {
+    getDataResource() {
         return {
-            "data": this.data
-        }
+            data: this.data
+        };
     }
-    getBuildingTypesResource () {
+    getBuildingTypesResource() {
         return {
-            "data": this.buildingTypes
-        }
+            data: this.buildingTypes
+        };
     }
 }
 

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import GMap from "../components/GMap";
 import config from "../config.json";
 import SearchBar from "../components/searchbar";
+import SearchResultDisplay from "../components/menuDisplay";
+import sortBuildings from "../util/util";
+import Flexbox from "flexbox-react";
 
 class CambridgeMap extends Component {
     constructor(props) {
@@ -17,8 +20,7 @@ class CambridgeMap extends Component {
             error: null,
             BUILDING_API: config.Backend.URL,
             query: q,
-            buildings: [],
-            selectedBuildings: []
+            buildings: []
         };
     }
 
@@ -27,13 +29,18 @@ class CambridgeMap extends Component {
             .then(res => res.json())
             .then(
                 result => {
-                    this.setState({
-                        isLoaded: true,
-                        buildings: result["data"]
-                    });
+                    const sortedBuildings = sortBuildings(result["data"]);
+                    console.log(sortedBuildings);
+                    this.setState(
+                        {
+                            buildings: sortedBuildings
+                        },
+                        () => {
+                            this._filterBuildings(this.state.query);
+                        }
+                    );
                 },
                 error => {
-                    console.log(error["data"]);
                     this.setState({
                         isLoaded: true,
                         error: error,
@@ -43,7 +50,20 @@ class CambridgeMap extends Component {
             );
     }
 
-    _filterBuildings = q => {};
+    _filterBuildings = q => {
+        let data = [];
+        if (q !== "") {
+            data = this.state.buildings.filter(building => {
+                const matchStr = building.name.toUpperCase();
+                const matchQ = q.toUpperCase();
+                return matchStr.indexOf(matchQ) > -1;
+            });
+        }
+        this.setState({
+            filteredBuildings: data,
+            isLoaded: true
+        });
+    };
 
     _processQueryChange = q => {
         this.setState({
@@ -53,20 +73,53 @@ class CambridgeMap extends Component {
     };
 
     render() {
-        const { isLoaded, error, selectedBuildings } = this.state;
+        const { isLoaded, error, filteredBuildings, query } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
             return (
-                <div>
-                    <SearchBar
-                        queryChange={this._processQueryChange}
-                        query={this.state.query}
-                    />
-                    <GMap buildings={selectedBuildings} />
-                </div>
+                <Flexbox flexDirection="column" minHeight="100vh">
+                    <Flexbox
+                        flexDirection="row"
+                        flexGrow={1}
+                        minWidth="100%"
+                        alignItems="center"
+                        style={{
+                            backgroundColor: "#edeeef"
+                        }}
+                    >
+                        <Flexbox
+                            flexGrow={1}
+                            justifyContent="center"
+                            alignItems="center"
+                        >
+                            <SearchBar
+                                queryChange={this._processQueryChange}
+                                query={this.state.query}
+                            />
+                        </Flexbox>
+                    </Flexbox>
+                    <Flexbox flexDirection="row" flexGrow={12}>
+                        <Flexbox
+                            flexDirection="column"
+                            style={{ width: "20%" }}
+                        >
+                            <SearchResultDisplay
+                                results={filteredBuildings}
+                                hasText={query !== ""}
+                            />
+                        </Flexbox>
+                        <Flexbox
+                            style={{
+                                width: "80%"
+                            }}
+                        >
+                            <GMap buildings={filteredBuildings} />
+                        </Flexbox>
+                    </Flexbox>
+                </Flexbox>
             );
         }
     }

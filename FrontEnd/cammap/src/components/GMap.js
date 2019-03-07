@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import GoogleMapReact from 'google-map-react'
-import Building from './building'
+import React, { Component } from "react";
+import GoogleMapReact from "google-map-react";
+import Building from "./building";
 const config = require("../config.json");
 
 class GMap extends Component {
@@ -15,28 +15,36 @@ class GMap extends Component {
                 lat: 42.374479,
                 lng: -71.117083
             },
-            zoom: 16,
+            zoom: 16
         };
     }
 
-    createLocations = () => {
-        return this.state.buildings.map(building => {
-            return <Building 
-                key={building.id}
-                text={building.name} 
-                lat={building.lat}
-                lng={building.lon}>
-            </Building>
-        })
+    componentWillReceiveProps(nextProps) {
+        this.setState({ buildings: nextProps.buildings });
     }
 
+    createLocations = () => {
+        if (this.state.buildings.length <= 20) {
+            return this.state.buildings.map(building => {
+                return (
+                    <Building
+                        key={building.id}
+                        text={building.name}
+                        lat={building.lat}
+                        lng={building.lon}
+                    />
+                );
+            });
+        }
+    };
+
     render() {
-        const {error} = this.state;
+        const { error } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else {
             return (
-                <div style={{ height: '100vh', width: '100%' }}>
+                <div style={{ height: "100%", width: "100%" }}>
                     <GoogleMapReact
                         bootstrapURLKeys={{ key: this.state.GOOGLE_API_KEY }}
                         defaultCenter={this.state.center}

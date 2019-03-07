@@ -2,7 +2,11 @@ import React, { Component } from "react";
 
 class Building extends Component {
     render() {
-        return <div>{this.props.text}</div>;
+        return (
+            <div className="CustomMapElement">
+                <div>{this.props.text}</div>
+            </div>
+        );
     }
 }
 

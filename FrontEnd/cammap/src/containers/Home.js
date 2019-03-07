@@ -43,7 +43,7 @@ class Home extends Component {
         } else {
             return (
                 <div>
-                    <div>TITLE</div>
+                    <div>A Map of Harvard University that doesn't SUCK</div>
                     <TextField
                         color="primary"
                         autoFocus={true}
@@ -51,7 +51,7 @@ class Home extends Component {
                         value={this.state.query}
                         onKeyPress={this._handleKeySubmit}
                         onChange={this._handleQueryUpdate}
-                        placeholder="Search for buildings, i.e. William James"
+                        placeholder="Search for buildings, i.e. William James Hall"
                         inputProps={{
                             style: { textAlign: "center" }
                         }}
