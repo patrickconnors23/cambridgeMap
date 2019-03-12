@@ -23,18 +23,22 @@ class GMap extends Component {
         this.setState({ buildings: nextProps.buildings });
     }
 
+    renderLocations = buildings => {
+        return buildings.map(building => {
+            return (
+                <Building
+                    key={building.id}
+                    text={building.name}
+                    lat={building.lat}
+                    lng={building.lon}
+                />
+            );
+        });
+    };
+
     createLocations = () => {
         if (this.state.buildings.length <= 20) {
-            return this.state.buildings.map(building => {
-                return (
-                    <Building
-                        key={building.id}
-                        text={building.name}
-                        lat={building.lat}
-                        lng={building.lon}
-                    />
-                );
-            });
+            return this.renderLocations(this.state.buildings);
         }
     };
 

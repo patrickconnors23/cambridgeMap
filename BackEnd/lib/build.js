@@ -1,8 +1,12 @@
 const data = require("../data/buildingsParsed.json");
+const locMapData = require("../data/buildingLocMap.json");
+const richData = require("../data/buildingsRich.json");
 
 class BuildingData {
     constructor() {
         this.data = data;
+        this.locMap = locMapData;
+        this.richData = richData;
         this.buildingTypes = [
             "Harvard Places",
             "Harvard Libraries",
@@ -22,14 +26,16 @@ class BuildingData {
         ];
     }
     getDataResource() {
-        return {
-            data: this.data
-        };
+        return { data: this.data };
     }
     getBuildingTypesResource() {
-        return {
-            data: this.buildingTypes
-        };
+        return { data: this.buildingType };
+    }
+    getLocationMap() {
+        return { data: this.locMap };
+    }
+    getRichData() {
+        return { data: this.richData };
     }
 }
 

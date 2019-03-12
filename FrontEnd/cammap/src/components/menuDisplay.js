@@ -18,16 +18,26 @@ class SearchResultDisplay extends Component {
         });
     }
 
+    _menuItemClick = id => {
+        this.props.menuItemClickHandler(id);
+    };
+
     _displayResultItems = () => {
         return this.state.results.map(result => {
-            return <SearchResultItem key={result.id} item={result} />;
+            return (
+                <SearchResultItem
+                    key={result.id}
+                    item={result}
+                    clickHandler={this._menuItemClick}
+                />
+            );
         });
     };
 
     _determineRenderComponent = () => {
         const { results, hasText } = this.state;
         if (results.length > 20) {
-            return <div>Hiding results... keep typing.</div>;
+            return <div>Hiding {results.length} results... keep typing.</div>;
         } else if (results.length > 0) {
             return this._displayResultItems();
             // return <div>We've got som5e search Result2s</div>;

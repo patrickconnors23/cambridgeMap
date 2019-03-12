@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 
 class SearchBar extends Component {
     constructor(props) {
@@ -36,9 +36,6 @@ class SearchBar extends Component {
                     }}
                     placeholder="Search for buildings, i.e. William James Hall"
                 />
-                {/* <Button variant="contained" color="primary">
-                    Search
-                </Button> */}
             </div>
         );
     }

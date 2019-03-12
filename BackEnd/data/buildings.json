@@ -4626,4 +4626,6 @@
     {"id" : "2481", "feature_type" : "Streets", "bld_num" : "", "bld_root" : "", "search_string" : "", "match_string" : "York Place", "lat" : "", "lon" : "", "sp_x": "766890", "sp_y" : "2960020"}
     , 
     {"id" : "2482", "feature_type" : "Streets", "bld_num" : "", "bld_root" : "", "search_string" : "", "match_string" : "York Street", "lat" : "42.338681", "lon" : "-71.104138", "sp_x": "766260", "sp_y" : "2960020"}
+    ,
+    {"id" : "9999", "feature_type" : "Harvard Buildings", "bld_num" : "100", "bld_root" : "06043", "search_string" : "", "match_string" : "Smith Center", "lat" : "42.372209", "lon" : "-71.11872", "sp_x": "759206.563", "sp_y" : "2961051.73"}
         ]}

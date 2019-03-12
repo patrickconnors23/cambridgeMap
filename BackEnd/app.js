@@ -20,12 +20,20 @@ app.get("/", (req, res) => {
     });
 });
 
-app.get("/buildingTypes", (req, res) => {
+app.get("/building/types", (req, res) => {
     res.send(buildingDataWrapper.getBuildingTypesResource());
 });
 
 app.get("/buildings", (req, res) => {
     res.send(buildingDataWrapper.getDataResource());
+});
+
+app.get("/buildings/locationMap", (req, res) => {
+    res.send(buildingDataWrapper.getLocationMap());
+});
+
+app.get("/buildings/richData", (req, res) => {
+    res.send(buildingDataWrapper.getRichData());
 });
 
 app.listen(PORT, HOST, () => {

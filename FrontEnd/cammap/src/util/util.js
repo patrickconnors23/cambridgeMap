@@ -1,4 +1,5 @@
 const sortBuildings = buildings => {
+    console.log(buildings);
     return buildings.sort((a, b) => {
         if (a.name < b.name) {
             return -1;
