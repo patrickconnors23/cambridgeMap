@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { ListItem } from "@material-ui/core";
+import Flexbox from "flexbox-react";
 
 class SearchResultItem extends Component {
     constructor(props) {
         super(props);
         const { name, id } = this.props.item;
-        console.log(this.props.item);
         this.state = {
             name: name,
             id: id,
             item: this.props.item,
+            showDetail: false,
             nameMap: {
                 "Harvard Places": "Places",
                 "Harvard Libraries": "Libraries",
@@ -18,8 +19,8 @@ class SearchResultItem extends Component {
                 "Harvard Schools": "Schools",
                 "Harvard Museums and Galleries": "Museums & Galleries",
                 "Harvard Rooms and Auditoriums": "Rooms",
-                Streets: "Streets",
                 "Harvard Dining": "D-Halls",
+                Streets: "Streets",
                 "Athletics Facilities": "Athletics",
                 "Harvard Residential Houses": "Housing",
                 "Departments, Centers,": "Departments",
@@ -29,7 +30,9 @@ class SearchResultItem extends Component {
     }
 
     _handleItemClick = () => {
-        this.props.clickHandler(this.state.id);
+        this.setState({ showDetail: !this.state.showDetail }, () => {
+            this.props.clickHandler(this.state.id, this.state.showDetail);
+        });
     };
 
     renderSubCategory = (name, lst) => {
@@ -68,19 +71,18 @@ class SearchResultItem extends Component {
                 );
             }
         });
-        if (liItems.length > 10) {
-            liItems = [];
-        }
-        return liItems;
+        return <ul>{liItems}</ul>;
     };
 
     render() {
         const subCategories = this._renderSubCategories();
-        const { name } = this.state;
+        const { name, showDetail } = this.state;
         return (
             <ListItem onClick={this._handleItemClick} divider={true}>
-                <div>{name}</div>
-                <ul>{subCategories}</ul>
+                <Flexbox flexDirection="column">
+                    <div>{name}</div>
+                    {showDetail && subCategories}
+                </Flexbox>
             </ListItem>
         );
     }

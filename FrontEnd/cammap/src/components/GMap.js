@@ -8,20 +8,25 @@ class GMap extends Component {
         super(props);
         this.state = {
             buildings: props.buildings,
+            center: props.location,
+            zoom: this.processZoom(this.props.zoomedIn),
             error: null,
             GOOGLE_API_KEY: config.GoogleMaps.API_KEY,
-            BUILDING_API: config.Backend.URL,
-            center: {
-                lat: 42.374479,
-                lng: -71.117083
-            },
-            zoom: 16
+            BUILDING_API: config.Backend.URL
         };
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ buildings: nextProps.buildings });
+        this.setState({
+            buildings: nextProps.buildings,
+            center: nextProps.center,
+            zoom: this.processZoom(nextProps.zoomedIn)
+        });
     }
+
+    processZoom = zoom => {
+        return zoom ? 18 : 16;
+    };
 
     renderLocations = buildings => {
         return buildings.map(building => {
@@ -31,6 +36,7 @@ class GMap extends Component {
                     text={building.name}
                     lat={building.lat}
                     lng={building.lon}
+                    parentClickHandler={this._handleItemSelection}
                 />
             );
         });
@@ -43,16 +49,17 @@ class GMap extends Component {
     };
 
     render() {
-        const { error } = this.state;
+        const { error, center, zoom } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else {
             return (
                 <div style={{ height: "100%", width: "100%" }}>
                     <GoogleMapReact
+                        className="google-map"
                         bootstrapURLKeys={{ key: this.state.GOOGLE_API_KEY }}
-                        defaultCenter={this.state.center}
-                        defaultZoom={this.state.zoom}
+                        center={center}
+                        zoom={zoom}
                     >
                         {this.createLocations()}
                     </GoogleMapReact>

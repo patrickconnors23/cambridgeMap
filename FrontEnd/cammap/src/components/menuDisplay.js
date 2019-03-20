@@ -18,8 +18,8 @@ class SearchResultDisplay extends Component {
         });
     }
 
-    _menuItemClick = id => {
-        this.props.menuItemClickHandler(id);
+    _menuItemClick = (id, expandingDetail) => {
+        this.props.menuItemClickHandler(id, expandingDetail);
     };
 
     _displayResultItems = () => {

@@ -16,7 +16,16 @@ class CambridgeMap extends Component {
             query: this.props.location.state
                 ? this.props.location.state.query
                 : "",
-            buildings: []
+            buildings: [],
+            defaultCenter: {
+                lat: 42.374479,
+                lng: -71.117083
+            },
+            location: {
+                lat: 42.374479,
+                lng: -71.117083
+            },
+            zoomedIn: false
         };
     }
 
@@ -57,14 +66,31 @@ class CambridgeMap extends Component {
         this._getBuildingData();
     }
 
-    _handleMenuItemClick = id => {
-        const selectedBuilding = this.state.buildings.filter(building => {
-            return building.id === id;
-        });
-        this.setState({
-            filteredBuildings: selectedBuilding,
-            isLoaded: true
-        });
+    _handleItemSelection = (id, useId) => {
+        if (useId) {
+            const selectedBuildings = this.state.buildings.filter(building => {
+                return building.id === id;
+            });
+            this.setState({
+                filteredBuildings: selectedBuildings,
+                isLoaded: true,
+                location: {
+                    lat: parseFloat(selectedBuildings[0]["lat"]),
+                    lng: parseFloat(selectedBuildings[0]["lon"])
+                },
+                zoomedIn: true
+            });
+        } else {
+            this.setState(
+                {
+                    location: this.state.defaultCenter,
+                    zoomedIn: false
+                },
+                () => {
+                    this._filterBuildings(this.state.q);
+                }
+            );
+        }
     };
 
     hasMatch = (q, aliases) => {
@@ -87,6 +113,7 @@ class CambridgeMap extends Component {
             });
         }
         this.setState({
+            q: q,
             filteredBuildings: data,
             isLoaded: true
         });
@@ -94,13 +121,21 @@ class CambridgeMap extends Component {
 
     _processQueryChange = q => {
         this.setState({
-            query: q
+            query: q,
+            zoomedIn: false
         });
         this._filterBuildings(q);
     };
 
     render() {
-        const { isLoaded, error, filteredBuildings, query } = this.state;
+        const {
+            isLoaded,
+            error,
+            filteredBuildings,
+            query,
+            location,
+            zoomedIn
+        } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -128,7 +163,7 @@ class CambridgeMap extends Component {
                             />
                         </Flexbox>
                     </Flexbox>
-                    <Flexbox flexDirection="row" flexGrow={12}>
+                    <Flexbox maxHeight="100%" flexDirection="row" flexGrow={12}>
                         <Flexbox
                             flexDirection="column"
                             style={{ width: "20%" }}
@@ -136,7 +171,7 @@ class CambridgeMap extends Component {
                             <SearchResultDisplay
                                 results={filteredBuildings}
                                 hasText={query !== ""}
-                                menuItemClickHandler={this._handleMenuItemClick}
+                                menuItemClickHandler={this._handleItemSelection}
                             />
                         </Flexbox>
                         <Flexbox
@@ -144,7 +179,13 @@ class CambridgeMap extends Component {
                                 width: "80%"
                             }}
                         >
-                            <GMap buildings={filteredBuildings} />
+                            <GMap
+                                center={location}
+                                zoomedIn={zoomedIn}
+                                location={location}
+                                buildings={filteredBuildings}
+                                menuItemClickHandler={this._handleItemSelection}
+                            />
                         </Flexbox>
                     </Flexbox>
                 </Flexbox>
