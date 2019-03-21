@@ -184,7 +184,7 @@ class CambridgeMap extends Component {
                                 zoomedIn={zoomedIn}
                                 location={location}
                                 buildings={filteredBuildings}
-                                menuItemClickHandler={this._handleItemSelection}
+                                childClickHandler={this._handleItemSelection}
                             />
                         </Flexbox>
                     </Flexbox>

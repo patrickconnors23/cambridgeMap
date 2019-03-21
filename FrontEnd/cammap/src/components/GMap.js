@@ -33,10 +33,11 @@ class GMap extends Component {
             return (
                 <Building
                     key={building.id}
+                    id={building.id}
                     text={building.name}
                     lat={building.lat}
                     lng={building.lon}
-                    parentClickHandler={this._handleItemSelection}
+                    parentClickHandler={this.props.childClickHandler}
                 />
             );
         });
