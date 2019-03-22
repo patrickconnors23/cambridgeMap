@@ -10,7 +10,7 @@ class SearchResultItem extends Component {
             name: name,
             id: id,
             item: this.props.item,
-            showDetail: false,
+            showDetail: this.props.showDetail,
             nameMap: {
                 "Harvard Places": "Places",
                 "Harvard Libraries": "Libraries",
@@ -27,6 +27,12 @@ class SearchResultItem extends Component {
                 "Departments, Centers, Institutes": "Departments"
             }
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            showDetail: nextProps.showDetail
+        });
     }
 
     _handleItemClick = () => {
@@ -78,7 +84,12 @@ class SearchResultItem extends Component {
         const subCategories = this._renderSubCategories();
         const { name, showDetail } = this.state;
         return (
-            <ListItem onClick={this._handleItemClick} divider={true}>
+            <ListItem
+                button
+                onClick={this._handleItemClick}
+                style={styles.listItem}
+                divider={true}
+            >
                 <Flexbox flexDirection="column">
                     <div>{name}</div>
                     {showDetail && subCategories}
@@ -87,5 +98,14 @@ class SearchResultItem extends Component {
         );
     }
 }
+
+const styles = {
+    button: {
+        width: "100%"
+    },
+    listItem: {
+        width: "100%"
+    }
+};
 
 export default SearchResultItem;

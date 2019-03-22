@@ -10,6 +10,7 @@ class GMap extends Component {
             buildings: props.buildings,
             center: props.location,
             zoom: this.processZoom(this.props.zoomedIn),
+            isZoomed: this.props.zoomedIn,
             error: null,
             GOOGLE_API_KEY: config.GoogleMaps.API_KEY,
             BUILDING_API: config.Backend.URL
@@ -38,6 +39,7 @@ class GMap extends Component {
                     lat={building.lat}
                     lng={building.lon}
                     parentClickHandler={this.props.childClickHandler}
+                    zoomedIn={this.state.zoomedIn}
                 />
             );
         });

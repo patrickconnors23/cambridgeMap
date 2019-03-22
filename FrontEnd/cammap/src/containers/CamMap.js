@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import GMap from "../components/GMap";
 import config from "../config.json";
 import SearchBar from "../components/searchbar";
-import SearchResultDisplay from "../components/menuDisplay";
+import SearchResultDisplay from "../components/searchResultDisplay";
 import sortBuildings from "../util/util";
 import Flexbox from "flexbox-react";
 
@@ -142,12 +142,17 @@ class CambridgeMap extends Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <Flexbox flexDirection="column" minHeight="100vh">
+                <Flexbox
+                    flexDirection="column"
+                    maxHeight="100%"
+                    minHeight="100vh"
+                    flexBasis={0}
+                >
                     <Flexbox
                         flexDirection="row"
-                        flexGrow={1}
                         minWidth="100%"
-                        alignItems="center"
+                        // alignItems="center"
+                        height="75px"
                         style={{
                             backgroundColor: "#edeeef"
                         }}
@@ -156,6 +161,7 @@ class CambridgeMap extends Component {
                             flexGrow={1}
                             justifyContent="center"
                             alignItems="center"
+                            minHeight="100%"
                         >
                             <SearchBar
                                 queryChange={this._processQueryChange}
@@ -163,22 +169,20 @@ class CambridgeMap extends Component {
                             />
                         </Flexbox>
                     </Flexbox>
-                    <Flexbox maxHeight="100%" flexDirection="row" flexGrow={12}>
+                    <Flexbox flex={9} flexDirection="row">
                         <Flexbox
                             flexDirection="column"
-                            style={{ width: "20%" }}
+                            minHeight="100%"
+                            style={styles.searchResultContainer}
                         >
                             <SearchResultDisplay
                                 results={filteredBuildings}
                                 hasText={query !== ""}
                                 menuItemClickHandler={this._handleItemSelection}
+                                zoomedIn={this.state.zoomedIn}
                             />
                         </Flexbox>
-                        <Flexbox
-                            style={{
-                                width: "80%"
-                            }}
-                        >
+                        <Flexbox style={styles.gmapContainer}>
                             <GMap
                                 center={location}
                                 zoomedIn={zoomedIn}
@@ -193,5 +197,14 @@ class CambridgeMap extends Component {
         }
     }
 }
+
+const styles = {
+    gmapContainer: {
+        width: "80%"
+    },
+    searchResultContainer: {
+        width: "20%"
+    }
+};
 
 export default CambridgeMap;

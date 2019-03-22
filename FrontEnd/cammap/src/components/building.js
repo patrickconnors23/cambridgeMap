@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import HomeRounded from "@material-ui/icons/HomeRounded";
 import Fab from "@material-ui/core/Fab";
 import Chip from "@material-ui/core/Chip";
-import { Card, CardContent } from "@material-ui/core";
 
 class Building extends Component {
     constructor(props) {
         super(props);
         this.state = {
             id: this.props.id,
-            expanded: false
+            expanded: this.props.zoomedIn
         };
     }
 
     _handleClick = () => {
         this.setState({ expanded: !this.state.expanded }, () => {
-            this.props.parentClickHandler(this.state.id, true);
+            console.log(this.state.expanded);
+            this.props.parentClickHandler(this.state.id, this.state.expanded);
         });
     };
 
@@ -29,10 +29,11 @@ class Building extends Component {
 
     _renderCard = () => {
         if (this.state.expanded) {
-            console.log("rendering");
             return (
                 <div>asdfkjsdalk fjsdklfjdsklfjdskljfklsdjf sdkljfsdlkfj</div>
             );
+        } else {
+            return <div />;
         }
     };
 
@@ -52,7 +53,6 @@ class Building extends Component {
                     color="secondary"
                     label={this.displayText(this.props.text)}
                 />
-                {this._renderCard}
             </div>
         );
     }
