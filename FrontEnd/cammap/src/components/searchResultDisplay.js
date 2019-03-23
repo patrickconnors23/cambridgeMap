@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Flexbox from "flexbox-react";
 import SearchResultItem from "./searchResultItem";
 import { Button } from "@material-ui/core";
+import elephant from "../img/elephant.json";
+import robot from "../img/robot.json";
+import MenuTypePrompt from "./typePrompt";
 
 class SearchResultDisplay extends Component {
     constructor(props) {
@@ -49,14 +52,27 @@ class SearchResultDisplay extends Component {
     _determineRenderComponent = () => {
         const { results, hasText } = this.state;
         if (results.length > 20) {
-            return <div>Hiding {results.length} results... keep typing.</div>;
+            return (
+                <MenuTypePrompt
+                    text={
+                        "Hiding " + results.length + " results... keep typing."
+                    }
+                    imgLink={elephant}
+                />
+            );
         } else if (results.length > 0) {
+            console.log("display");
             return this._displayResultItems();
-            // return <div>We've got som5e search Result2s</div>;
         } else if (hasText) {
-            return <div>Oops! Try another search</div>;
+            console.log("nothing");
+            return (
+                <MenuTypePrompt
+                    text="Oops! Try another search."
+                    imgLink={robot}
+                />
+            );
         } else {
-            return <div>Start Typing</div>;
+            return <MenuTypePrompt text="Start typing!" imgLink={elephant} />;
         }
     };
 

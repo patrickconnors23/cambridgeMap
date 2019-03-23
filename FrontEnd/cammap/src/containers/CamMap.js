@@ -146,7 +146,6 @@ class CambridgeMap extends Component {
                     flexDirection="column"
                     maxHeight="100%"
                     minHeight="100vh"
-                    flexBasis={0}
                 >
                     <Flexbox
                         flexDirection="row"
@@ -169,7 +168,7 @@ class CambridgeMap extends Component {
                             />
                         </Flexbox>
                     </Flexbox>
-                    <Flexbox flex={9} flexDirection="row">
+                    <Flexbox flex={"9"} flexDirection="row">
                         <Flexbox
                             flexDirection="column"
                             minHeight="100%"

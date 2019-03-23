@@ -9,6 +9,7 @@
     "flexbox-react": "^4.4.0",
     "google-map-react": "^1.1.2",
     "react": "^16.8.3",
+    "react-bodymovin": "^2.0.0",
     "react-dom": "^16.8.3",
     "react-leaflet": "^2.2.1",
     "react-router": "^4.3.1",
