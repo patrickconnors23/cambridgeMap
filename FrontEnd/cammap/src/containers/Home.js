@@ -11,6 +11,7 @@ import { Paper, Button } from "@material-ui/core";
 import map from "../img/map.png";
 import harvardLogo from "../img/harvardLogo.png";
 import material from "../img/material.svg";
+import node from "../img/node.png";
 
 class Home extends Component {
     constructor(props) {
@@ -117,6 +118,7 @@ class Home extends Component {
                             <Logo isLottie={true} link={reactLogo} speed={5} />
                             <Logo isLottie={false} link={material} />
                             <Logo isLottie={true} link={lottie} speed={3} />
+                            <Logo isLottie={false} link={node} speed={3} />
                             <Logo isLottie={true} link={pin} />
                         </Flexbox>
                     </Flexbox>
@@ -157,7 +159,7 @@ const styles = {
         marginBottom: "20px"
     },
     header: {
-        marginTop: "50px"
+        marginTop: "70px"
     }
 };
 

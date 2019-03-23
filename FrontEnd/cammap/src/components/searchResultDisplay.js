@@ -61,10 +61,8 @@ class SearchResultDisplay extends Component {
                 />
             );
         } else if (results.length > 0) {
-            console.log("display");
             return this._displayResultItems();
         } else if (hasText) {
-            console.log("nothing");
             return (
                 <MenuTypePrompt
                     text="Oops! Try another search."

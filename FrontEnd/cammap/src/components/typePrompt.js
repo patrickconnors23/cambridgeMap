@@ -6,30 +6,31 @@ class MenuTypePrompt extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            imglink: this.props.imgLink,
+            imgLink: this.props.imgLink,
             text: this.props.text
         };
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            imgLink: nextProps.imgLink,
-            text: nextProps.text
-        });
+        if (this.props !== nextProps) {
+            this.setState({
+                imgLink: nextProps.imgLink,
+                text: nextProps.text
+            });
+        }
     }
-    _createOptions = link => {
+    _createOptions = () => {
         return {
             loop: true,
-            speed: this.props.speed,
             autoplay: true,
             prerender: true,
-            animationData: link
+            animationData: this.state.imgLink
         };
     };
 
     render() {
-        const { text, imglink } = this.state;
-        const options = this._createOptions(imglink);
+        const { text } = this.state;
+        const options = this._createOptions();
         return (
             <Flexbox flexDirection="column" alignItems="center">
                 <h4>{text}</h4>
