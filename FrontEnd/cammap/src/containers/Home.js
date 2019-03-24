@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactBodymovin from "react-bodymovin";
+import Typography from "@material-ui/core/Typography";
 import Logo from "../components/logo";
 import reactLogo from "../img/react.json";
 import pin from "../img/pin.json";
@@ -65,7 +65,13 @@ class Home extends Component {
                         flexDirection="row"
                         alignItems="center"
                     >
-                        <img height="50px" width="50px" src={map} alt="map" />
+                        <img
+                            height="50px"
+                            width="50px"
+                            style={styles.img}
+                            src={map}
+                            alt="map"
+                        />
                         <img
                             height="50px"
                             width="50px"
@@ -122,9 +128,35 @@ class Home extends Component {
                             <Logo isLottie={true} link={pin} />
                         </Flexbox>
                     </Flexbox>
-                    <Flexbox flexDirection="column" alignItems="center">
-                        <h2 style={styles.header}>Project Inspiration</h2>
-                        <p>Hello</p>
+                    <Flexbox
+                        style={styles.textBody}
+                        flexDirection="column"
+                        alignItems="center"
+                    >
+                        <h2 style={styles.header}>Project Notes</h2>
+                        <Typography align="left" variant="subtitle1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Harvard’s{" "}
+                            <a href="https://map.harvard.edu">
+                                current campus map
+                            </a>{" "}
+                            is a clunky, 10 y/o solution that relies on svg +
+                            server-side rendering, and proprietary software.
+                            Map.Harvard 2.0 strives to give the tool a revamp
+                            using modern web technologies such as Node.js,
+                            Facebook’s React, Google’s Maps API and Material-UI,
+                            and Airbnb’s Lottie. Though far from being a
+                            production-ready product, it’s a testament to both
+                            how far web development has come in the last eight
+                            years, and the importance of open-source software.
+                            <br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My
+                            web app relies on location data pulled from
+                            Harvard's map. After running some preprocessing with
+                            Python, I expose the data via a simple Node.js API.
+                            Then, the React app pulls this data and renders it
+                            in a searchable and interactive format.
+                        </Typography>
                     </Flexbox>
                 </Flexbox>
             );
@@ -134,7 +166,6 @@ class Home extends Component {
 
 const styles = {
     container: {
-        // backgroundColor: "red",
         minHeight: "100vh"
     },
     submitButton: {
@@ -142,7 +173,6 @@ const styles = {
     },
     submitContainer: {
         width: "50%",
-        // backgroundColor: "blue",
         display: "flex"
     },
     textField: {
@@ -153,13 +183,21 @@ const styles = {
         flexGrow: 1
     },
     img: {
-        margin: "10px"
+        marginLeft: "20px",
+        marginRight: "20px",
+        marginTop: "10px",
+        marginBottom: "20px"
     },
     logoContainer: {
         marginBottom: "20px"
     },
     header: {
-        marginTop: "70px"
+        marginTop: "60px",
+        marginBottom: "30px"
+    },
+    textBody: {
+        width: "75%",
+        paddingBottom: "80px"
     }
 };
 

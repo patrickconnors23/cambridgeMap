@@ -153,7 +153,7 @@ class CambridgeMap extends Component {
                         // alignItems="center"
                         height="75px"
                         style={{
-                            backgroundColor: "#edeeef"
+                            backgroundColor: "primary"
                         }}
                     >
                         <Flexbox
