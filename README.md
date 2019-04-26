@@ -1,1 +1,1 @@
-https://harvardmap-h5jp.onrender.com/map
+https://harvardmap-h5jp.onrender.com
