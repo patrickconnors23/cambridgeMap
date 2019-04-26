@@ -50,6 +50,8 @@ class Home extends Component {
                     }}
                 />
             );
+        } else if (1 == 2) {
+            return <Link />;
         } else {
             return (
                 <Flexbox

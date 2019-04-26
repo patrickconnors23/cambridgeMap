@@ -40,12 +40,4 @@ class MenuTypePrompt extends Component {
     }
 }
 
-const styles = {
-    logo: {
-        heigh: "100px",
-        width: "100px",
-        margin: "30px"
-    }
-};
-
 export default MenuTypePrompt;
