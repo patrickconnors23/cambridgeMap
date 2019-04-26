@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import Building from "./building";
-const config = require("../config.json");
+const config = require("../config.js");
 
 class GMap extends Component {
     constructor(props) {
@@ -12,8 +12,7 @@ class GMap extends Component {
             zoom: this.processZoom(this.props.zoomedIn),
             isZoomed: this.props.zoomedIn,
             error: null,
-            GOOGLE_API_KEY: config.GoogleMaps.API_KEY,
-            BUILDING_API: config.Backend.URL
+            GOOGLE_API_KEY: config["GOOGLE_MAPS_API_KEY"]
         };
     }
 
@@ -52,6 +51,8 @@ class GMap extends Component {
     };
 
     render() {
+        console.log(config);
+        console.log(this.state.GOOGLE_API_KEY);
         const { error, center, zoom } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;

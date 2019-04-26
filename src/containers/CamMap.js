@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import GMap from "../components/GMap";
-import config from "../config.json";
 import SearchBar from "../components/searchbar";
 import SearchResultDisplay from "../components/searchResultDisplay";
 import Flexbox from "flexbox-react";
@@ -12,7 +11,6 @@ class CambridgeMap extends Component {
         this.state = {
             isLoaded: false,
             error: null,
-            BUILDING_API: config.Backend.URL,
             query: this.props.location.state
                 ? this.props.location.state.query
                 : "",
