@@ -1,3 +1,3 @@
 module.exports = {
-    GOOGLE_MAPS_API_KEY: process.env["GGL_API_KEY"]
+    GOOGLE_MAPS_API_KEY: "AIzaSyDrbv2S_e_nqZNuRiaSsccFBDPuOiYlNYI"
 };
