@@ -3,8 +3,8 @@ import GMap from "../components/GMap";
 import config from "../config.json";
 import SearchBar from "../components/searchbar";
 import SearchResultDisplay from "../components/searchResultDisplay";
-import sortBuildings from "../util/util";
 import Flexbox from "flexbox-react";
+import buildingData from "../buildingsRich.json";
 
 class CambridgeMap extends Component {
     constructor(props) {
@@ -30,36 +30,15 @@ class CambridgeMap extends Component {
     }
 
     _getBuildingData = () => {
-        const promises = Promise.all([
-            fetch(this.state.BUILDING_API + "/buildings"),
-            fetch(this.state.BUILDING_API + "/buildings/locationMap"),
-            fetch(this.state.BUILDING_API + "/buildings/richData")
-        ]);
-
-        promises
-            .then(([res1, res2, res3]) => {
-                return Promise.all([res1.json(), res2.json(), res3.json()]);
-            })
-            .then(
-                ([res1, res2, res3]) => {
-                    const sortedBuildings = sortBuildings(res3["data"]);
-                    this.setState(
-                        {
-                            buildings: sortedBuildings
-                        },
-                        () => {
-                            this._filterBuildings(this.state.query);
-                        }
-                    );
-                },
-                error => {
-                    this.setState({
-                        isLoaded: true,
-                        error: error,
-                        buildings: []
-                    });
-                }
-            );
+        const sortedBuildings = buildingData;
+        this.setState(
+            {
+                buildings: sortedBuildings
+            },
+            () => {
+                this._filterBuildings(this.state.query);
+            }
+        );
     };
 
     componentDidMount() {
